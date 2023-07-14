@@ -266,6 +266,10 @@ export const meta = {
 				type: 'object',
 				optional: false, nullable: false,
 			},
+			translatorType: {
+				type: 'string',
+				optional: false, nullable: true,
+			},
 		},
 	},
 } as const;
@@ -322,7 +326,9 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 				defaultDarkTheme: instance.defaultDarkTheme,
 				enableEmail: instance.enableEmail,
 				enableServiceWorker: instance.enableServiceWorker,
-				translatorAvailable: instance.deeplAuthKey != null,
+				//translatorAvailable: instance.deeplAuthKey != null,
+				translatorAvailable: instance.translatorType != null,
+				translatorType: instance.translatorType,
 				cacheRemoteFiles: instance.cacheRemoteFiles,
 				pinnedUsers: instance.pinnedUsers,
 				hiddenTags: instance.hiddenTags,

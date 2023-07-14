@@ -429,4 +429,10 @@ export class Meta {
 		length: 1024, array: true, default: '{ "admin", "administrator", "root", "system", "maintainer", "host", "mod", "moderator", "owner", "superuser", "staff", "auth", "i", "me", "everyone", "all", "mention", "mentions", "example", "user", "users", "account", "accounts", "official", "help", "helps", "support", "supports", "info", "information", "informations", "announce", "announces", "announcement", "announcements", "notice", "notification", "notifications", "dev", "developer", "developers", "tech", "misskey" }',
 	})
 	public preservedUsernames: string[];
+
+	@Column('varchar', {
+		length: 32,
+		nullable: true,
+	})
+	public translatorType: string | null;
 }
