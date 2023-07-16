@@ -64,6 +64,7 @@ export const paramDef = {
 			type: 'string',
 		} },
 		summalyProxy: { type: 'string', nullable: true },
+		translatorType: { type: 'string', nullable: true},
 		deeplAuthKey: { type: 'string', nullable: true },
 		deeplIsPro: { type: 'boolean' },
 		enableEmail: { type: 'boolean' },
@@ -369,6 +370,14 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 
 			if (ps.objectStorageS3ForcePathStyle !== undefined) {
 				set.objectStorageS3ForcePathStyle = ps.objectStorageS3ForcePathStyle;
+			}
+
+			if (ps.translatorType !== undefined) {
+				if (ps.translatorType === '') {
+					set.translatorType = null;
+				} else {
+					set.translatorType = ps.translatorType;
+				}
 			}
 
 			if (ps.deeplAuthKey !== undefined) {
