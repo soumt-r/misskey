@@ -66,22 +66,24 @@
 					<FormSection>
 						<template #label>Translation</template>
 
-						<FormRadios v-model="translatorType" class="_formBlock">
-							<template #label>Translator type</template>
-							<option :value="null">{{ i18n.ts.none }}</option>
-							<option value="DeepL">DeepL</option>
-							<option value="GoogleNoAPI">Google Translate(without API)</option>
-						</FormRadios>
+						<div class="_gaps_m">
+							<FormRadios v-model="provider">
+								<template #label>Translator type</template>
+								<option :value="null">{{ i18n.ts.none }}</option>
+								<option value="DeepL">DeepL</option>
+								<option value="GoogleNoAPI">Google Translate(without API)</option>
+							</FormRadios>
 
-						<template v-if="translatorType === 'DeepL'">
-							<FormInput v-model="deeplAuthKey" class="_formBlock">
-								<template #prefix><i class="fas fa-key"></i></template>
-								<template #label>DeepL Auth Key</template>
-							</FormInput>
-							<FormSwitch v-model="deeplIsPro" class="_formBlock">
-								<template #label>Pro account</template>
-							</FormSwitch>
-						</template>
+							<template v-if="translatorType === 'DeepL'">
+								<MkInput v-model="deeplAuthKey">
+									<template #prefix><i class="fas fa-key"></i></template>
+									<template #label>DeepL Auth Key</template>
+								</MkInput>
+								<MkSwitch v-model="deeplIsPro" class="_formBlock">
+									<template #label>Pro account</template>
+								</MkSwitch>
+							</template>
+						</div>
 					</FormSection>
 				</div>
 			</FormSuspense>
