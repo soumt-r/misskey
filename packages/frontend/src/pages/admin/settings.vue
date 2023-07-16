@@ -67,7 +67,7 @@
 						<template #label>Translation</template>
 
 						<div class="_gaps_m">
-							<FormRadios v-model="provider">
+							<FormRadios v-model="translatorType">
 								<template #label>Translator type</template>
 								<option :value="null">{{ i18n.ts.none }}</option>
 								<option value="DeepL">DeepL</option>
