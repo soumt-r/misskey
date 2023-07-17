@@ -173,6 +173,7 @@
 	definePageMetadata({
 		title: i18n.ts.general,
 		icon: 'ti ti-settings',
+
 	});
 	</script>
 	

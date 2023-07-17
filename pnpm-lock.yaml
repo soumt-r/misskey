@@ -679,6 +679,7 @@ importers:
       buraha:
         specifier: github:misskey-dev/buraha#92b20c1
         version: github.com/misskey-dev/buraha/92b20c1
+
       canvas-confetti:
         specifier: 1.6.0
         version: 1.6.0
@@ -21805,8 +21806,9 @@ packages:
 
   github.com/misskey-dev/buraha/92b20c1:
     resolution: {tarball: https://codeload.github.com/misskey-dev/buraha/tar.gz/92b20c1}
+
     name: buraha
-    version: 0.0.0
+    version: 0.0.1
     dev: false
 
   github.com/misskey-dev/sharp-read-bmp/02d9dc189fa7df0c4bea09330be26741772dac01:
