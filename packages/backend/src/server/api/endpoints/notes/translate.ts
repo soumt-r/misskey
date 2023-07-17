@@ -44,6 +44,7 @@ export const paramDef = {
 	required: ['noteId', 'targetLang'],
 } as const;
 
+
 // eslint-disable-next-line import/no-default-export
 @Injectable()
 export default class extends Endpoint<typeof meta, typeof paramDef> {
@@ -67,6 +68,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 			const translatorServices = [
 				'DeepL',
 				'GoogleNoAPI',
+				'Naver',
 			];
 
 			if (!(await this.noteEntityService.isVisibleForMe(note, me ? me.id : null))) {
@@ -126,9 +128,52 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 					text: text,
 					translator: translatorServices,
 				};
+			} else if (instance.translatorType === 'Naver') {
+				if (instance.naverClientId == null || instance.naverClientSecret == null) {
+					return 204; // TODO: 良い感じのエラー返す
+				}
+
+				return await this.translatePapago(note.text, ps.targetLang, instance.naverClientId, instance.naverClientSecret, translatorServices);
 			} else {
 				throw new ApiError(meta.errors.noTranslateService);
 			}
 		});
+	}
+	private async translatePapago(text: String, targetLang: string, clId: string, clSecret: string, provider: string[]) {
+		// 언어 감지
+		const reqHeader = {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			Accept: 'application/json, */*',
+			'X-Naver-Client-Id': clId,
+			'X-Naver-Client-Secret': clSecret,
+		};
+		const detectLang = await this.httpRequestService.send('https://openapi.naver.com/v1/papago/detectLangs', {
+			method: 'POST',
+			headers: reqHeader,
+			body: `query=${text}`,
+		});
+		const detectLangJson = await detectLang.json() as {
+			langCode: string;
+		};
+		const sourceLang = detectLangJson.langCode;
+
+		// 번역
+		const translate = await this.httpRequestService.send('https://openapi.naver.com/v1/papago/n2mt', {
+			method: 'POST',
+			headers: reqHeader,
+			body: `source=${sourceLang}&target=${targetLang}&text=${text}`,
+		});
+		const translateJson = await translate.json() as {
+			message: {
+				result: {
+					translatedText: string;
+				}
+		};
+
+		return {
+			sourceLang: sourceLang,
+			text: translateJson.message.result.translatedText,
+			translator: provider,
+		};
 	}
 }

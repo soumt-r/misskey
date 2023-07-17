@@ -72,16 +72,28 @@
 									<option :value="null">{{ i18n.ts.none }}</option>
 									<option value="DeepL">DeepL</option>
 									<option value="GoogleNoAPI">Google Translate(without API)</option>
+									<option value="Naver">Naver Papago</option>
 								</MkRadios>
 	
 								<template v-if="translatorType === 'DeepL'">
-									<FormInput v-model="deeplAuthKey">
+									<MkInput v-model="deeplAuthKey">
 										<template #prefix><i class="fas fa-key"></i></template>
 										<template #label>DeepL Auth Key</template>
-									</FormInput>
-									<FormSwitch v-model="deeplIsPro" class="_formBlock">
+									</MkInput>
+									<MkSwitch v-model="deeplIsPro" class="_formBlock">
 										<template #label>Pro account</template>
-									</FormSwitch>
+									</MkSwitch>
+								</template>
+
+								<template v-if="translatorType === 'Naver'">
+									<MkInput v-model="naverClientId">
+										<template #prefix><i class="fas fa-key"></i></template>
+										<template #label>Naver Client ID</template>
+									</MkInput>
+									<MkInput v-model="naverClientSecret">
+										<template #prefix><i class="fas fa-key"></i></template>
+										<template #label>Naver Client Secret</template>
+									</MkInput>
 								</template>
 							</div>
 						</FormSection>
@@ -130,6 +142,8 @@
 	let translatorType: string | null = $ref(null);
 	let deeplAuthKey: string = $ref('');
 	let deeplIsPro: boolean = $ref(false);
+	let naverClientId: string = $ref('');
+	let naverClientSecret: string = $ref('');
 	
 	async function init() {
 		const meta = await os.api('admin/meta');
@@ -145,6 +159,8 @@
 		translatorType = meta.translatorType;
 		deeplAuthKey = meta.deeplAuthKey;
 		deeplIsPro = meta.deeplIsPro;
+		naverClientId = meta.naverClientId;
+		naverClientSecret = meta.naverClientSecret;
 	
 		provider = meta.translatorType;
 	}
@@ -163,6 +179,8 @@
 			translatorType: provider,
 			deeplAuthKey,
 			deeplIsPro,
+			naverClientId,
+			naverClientSecret,
 		}).then(() => {
 			fetchInstance();
 		});
