@@ -152,7 +152,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 			headers: reqHeader,
 			body: `query=${text}`,
 		});
-		const detectLangJson = await detectLang.json() as {
+		const detectLangJson = (await detectLang.json()) as {
 			langCode: string;
 		};
 		const sourceLang = detectLangJson.langCode;
@@ -163,7 +163,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 			headers: reqHeader,
 			body: `source=${sourceLang}&target=${targetLang}&text=${text}`,
 		});
-		const translateJson = await translate.json() as {
+		const translateJson = (await translate.json()) as {
 			message: {
 				result: {
 					translatedText: string;
