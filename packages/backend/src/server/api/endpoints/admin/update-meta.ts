@@ -67,6 +67,8 @@ export const paramDef = {
 		translatorType: { type: 'string', nullable: true},
 		deeplAuthKey: { type: 'string', nullable: true },
 		deeplIsPro: { type: 'boolean' },
+		naverClientId: { type: 'string', nullable: true },
+		naverClientSecret: { type: 'string', nullable: true },
 		enableEmail: { type: 'boolean' },
 		email: { type: 'string', nullable: true },
 		smtpSecure: { type: 'boolean' },
@@ -390,6 +392,14 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 
 			if (ps.deeplIsPro !== undefined) {
 				set.deeplIsPro = ps.deeplIsPro;
+			}
+			
+			if (ps.naverClientId !== undefined) {
+				set.naverClientId = ps.naverClientId;
+			}
+
+			if (ps.naverClientSecret !== undefined) {
+				set.naverClientSecret = ps.naverClientSecret;
 			}
 
 			if (ps.enableIpLogging !== undefined) {

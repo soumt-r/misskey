@@ -366,6 +366,8 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 				objectStorageS3ForcePathStyle: instance.objectStorageS3ForcePathStyle,
 				deeplAuthKey: instance.deeplAuthKey,
 				deeplIsPro: instance.deeplIsPro,
+				naverClientId: instance.naverClientId,
+				naverClientSecret: instance.naverClientSecret,
 				enableIpLogging: instance.enableIpLogging,
 				enableActiveEmailValidation: instance.enableActiveEmailValidation,
 				enableChartsForRemoteUser: instance.enableChartsForRemoteUser,

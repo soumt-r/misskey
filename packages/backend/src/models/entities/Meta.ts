@@ -435,4 +435,16 @@ export class Meta {
 		nullable: true,
 	})
 	public translatorType: string | null;
+
+	@Column('varchar', {
+		length: 1024,
+		nullable: true,
+	})
+	public naverClientId: string | null;
+
+	@Column('varchar', {
+		length: 1024,
+		nullable: true,
+	})
+	public naverClientSecret: string | null;
 }
