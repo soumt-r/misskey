@@ -168,6 +168,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 				result: {
 					translatedText: string;
 				}
+			}
 		};
 
 		return {
