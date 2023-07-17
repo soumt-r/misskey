@@ -677,8 +677,9 @@ importers:
         specifier: github:misskey-dev/browser-image-resizer#v2.2.1-misskey.3
         version: github.com/misskey-dev/browser-image-resizer/0227e860621e55cbed0aabe6dc601096a7748c4a
       buraha:
-        specifier: github:misskey-dev/buraha
-        version: github.com/misskey-dev/buraha/49e45bb3283b378f27e3886825bb2048a27c6d3e
+        specifier: github:misskey-dev/buraha#92b20c1
+        version: github.com/misskey-dev/buraha/92b20c1
+
       canvas-confetti:
         specifier: 1.6.0
         version: 1.6.0
@@ -21803,8 +21804,9 @@ packages:
     version: 2.2.1-misskey.3
     dev: false
 
-  github.com/misskey-dev/buraha/49e45bb3283b378f27e3886825bb2048a27c6d3e:
-    resolution: {tarball: https://codeload.github.com/misskey-dev/buraha/tar.gz/49e45bb3283b378f27e3886825bb2048a27c6d3e}
+  github.com/misskey-dev/buraha/92b20c1:
+    resolution: {tarball: https://codeload.github.com/misskey-dev/buraha/tar.gz/92b20c1}
+
     name: buraha
     version: 0.0.1
     dev: false
