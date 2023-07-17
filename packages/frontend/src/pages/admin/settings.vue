@@ -75,7 +75,7 @@
 									<option value="Naver">Naver Papago</option>
 								</MkRadios>
 	
-								<template v-if="translatorType === 'DeepL'">
+								<template v-if="provider === 'DeepL'">
 									<MkInput v-model="deeplAuthKey">
 										<template #prefix><i class="fas fa-key"></i></template>
 										<template #label>DeepL Auth Key</template>
@@ -85,7 +85,7 @@
 									</MkSwitch>
 								</template>
 
-								<template v-if="translatorType === 'Naver'">
+								<template v-if="provider === 'Naver'">
 									<MkInput v-model="naverClientId">
 										<template #prefix><i class="fas fa-key"></i></template>
 										<template #label>Naver Client ID</template>
