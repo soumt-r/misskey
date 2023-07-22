@@ -51,7 +51,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 	constructor(
 		@Inject(DI.config)
 		private config: Config,
-	
+
 		@Inject(DI.notesRepository)
 		private notesRepository: NotesRepository,
 
@@ -156,6 +156,13 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 			langCode: string;
 		};
 		const sourceLang = detectLangJson.langCode;
+
+		// 필드 테스트
+		return {
+			sourceLang: sourceLang,
+			text: text,
+			translator: provider,
+		};
 
 		// 번역
 		const translate = await this.httpRequestService.send('https://openapi.naver.com/v1/papago/n2mt', {
