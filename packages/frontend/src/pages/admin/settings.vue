@@ -37,6 +37,13 @@
 									<template #label>{{ i18n.ts.cacheRemoteFiles }}</template>
 									<template #caption>{{ i18n.ts.cacheRemoteFilesDescription }}</template>
 								</MkSwitch>
+
+								<template v-if="cacheRemoteFiles">
+								<MkSwitch v-model="cacheRemoteSensitiveFiles">
+									<template #label>{{ i18n.ts.cacheRemoteSensitiveFiles }}</template>
+									<template #caption>{{ i18n.ts.cacheRemoteSensitiveFilesDescription }}</template>
+								</MkSwitch>
+							</template>
 							</div>
 						</FormSection>
 
@@ -135,6 +142,7 @@
 	let maintainerEmail: string | null = $ref(null);
 	let pinnedUsers: string = $ref('');
 	let cacheRemoteFiles: boolean = $ref(false);
+	let cacheRemoteSensitiveFiles: boolean = $ref(false);
 	let enableServiceWorker: boolean = $ref(false);
 	let provider: string | null = $ref(null);
 	let swPublicKey: any = $ref(null);
@@ -153,6 +161,7 @@
 		maintainerEmail = meta.maintainerEmail;
 		pinnedUsers = meta.pinnedUsers.join('\n');
 		cacheRemoteFiles = meta.cacheRemoteFiles;
+		cacheRemoteSensitiveFiles = meta.cacheRemoteSensitiveFiles;
 		enableServiceWorker = meta.enableServiceWorker;
 		swPublicKey = meta.swPublickey;
 		swPrivateKey = meta.swPrivateKey;
@@ -173,6 +182,7 @@
 			maintainerEmail,
 			pinnedUsers: pinnedUsers.split('\n'),
 			cacheRemoteFiles,
+			cacheRemoteSensitiveFiles,
 			enableServiceWorker,
 			swPublicKey,
 			swPrivateKey,
