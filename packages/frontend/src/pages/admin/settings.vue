@@ -8,90 +8,30 @@
 						<MkInput v-model="name">
 							<template #label>{{ i18n.ts.instanceName }}</template>
 						</MkInput>
-	
+
 						<MkTextarea v-model="description">
 							<template #label>{{ i18n.ts.instanceDescription }}</template>
 						</MkTextarea>
-	
+
 						<FormSplit :minWidth="300">
 							<MkInput v-model="maintainerName">
 								<template #label>{{ i18n.ts.maintainerName }}</template>
-
-						<MkInput v-model="maintainerEmail" type="email">
-							<template #prefix><i class="ti ti-mail"></i></template>
-							<template #label>{{ i18n.ts.maintainerEmail }}</template>
-						</MkInput>
-					</FormSplit>
-
-					<MkTextarea v-model="pinnedUsers">
-						<template #label>{{ i18n.ts.pinnedUsers }}</template>
-						<template #caption>{{ i18n.ts.pinnedUsersDescription }}</template>
-					</MkTextarea>
-
-					<FormSection>
-						<template #label>{{ i18n.ts.files }}</template>
-
-						<div class="_gaps_m">
-							<MkSwitch v-model="cacheRemoteFiles">
-								<template #label>{{ i18n.ts.cacheRemoteFiles }}</template>
-								<template #caption>{{ i18n.ts.cacheRemoteFilesDescription }}</template>
-							</MkSwitch>
-
-							<template v-if="cacheRemoteFiles">
-								<MkSwitch v-model="cacheRemoteSensitiveFiles">
-									<template #label>{{ i18n.ts.cacheRemoteSensitiveFiles }}</template>
-									<template #caption>{{ i18n.ts.cacheRemoteSensitiveFilesDescription }}</template>
-								</MkSwitch>
-							</template>
-						</div>
-					</FormSection>
-
-					<FormSection>
-						<template #label>ServiceWorker</template>
-
-						<div class="_gaps_m">
-							<MkSwitch v-model="enableServiceWorker">
-								<template #label>{{ i18n.ts.enableServiceworker }}</template>
-								<template #caption>{{ i18n.ts.serviceworkerInfo }}</template>
-							</MkSwitch>
-
-							<template v-if="enableServiceWorker">
-								<MkInput v-model="swPublicKey">
-									<template #prefix><i class="ti ti-key"></i></template>
-									<template #label>Public key</template>
-								</MkInput>
-
-								<MkInput v-model="swPrivateKey">
-									<template #prefix><i class="ti ti-key"></i></template>
-									<template #label>Private key</template>
-								</MkInput>
-							</template>
-						</div>
-					</FormSection>
-
-					<FormSection>
-						<template #label>DeepL Translation</template>
-
-						<div class="_gaps_m">
-							<MkInput v-model="deeplAuthKey">
-								<template #prefix><i class="ti ti-key"></i></template>
-								<template #label>DeepL Auth Key</template>
 							</MkInput>
-	
+
 							<MkInput v-model="maintainerEmail" type="email">
 								<template #prefix><i class="ti ti-mail"></i></template>
 								<template #label>{{ i18n.ts.maintainerEmail }}</template>
 							</MkInput>
 						</FormSplit>
-	
+
 						<MkTextarea v-model="pinnedUsers">
 							<template #label>{{ i18n.ts.pinnedUsers }}</template>
 							<template #caption>{{ i18n.ts.pinnedUsersDescription }}</template>
 						</MkTextarea>
-	
+
 						<FormSection>
 							<template #label>{{ i18n.ts.files }}</template>
-	
+
 							<div class="_gaps_m">
 								<MkSwitch v-model="cacheRemoteFiles">
 									<template #label>{{ i18n.ts.cacheRemoteFiles }}</template>
@@ -99,22 +39,22 @@
 								</MkSwitch>
 							</div>
 						</FormSection>
-	
+
 						<FormSection>
 							<template #label>ServiceWorker</template>
-	
+
 							<div class="_gaps_m">
 								<MkSwitch v-model="enableServiceWorker">
 									<template #label>{{ i18n.ts.enableServiceworker }}</template>
 									<template #caption>{{ i18n.ts.serviceworkerInfo }}</template>
 								</MkSwitch>
-	
+
 								<template v-if="enableServiceWorker">
 									<MkInput v-model="swPublicKey">
 										<template #prefix><i class="ti ti-key"></i></template>
 										<template #label>Public key</template>
 									</MkInput>
-	
+
 									<MkInput v-model="swPrivateKey">
 										<template #prefix><i class="ti ti-key"></i></template>
 										<template #label>Private key</template>
@@ -122,10 +62,10 @@
 								</template>
 							</div>
 						</FormSection>
-	
+
 						<FormSection>
 							<template #label>Translation</template>
-	
+
 							<div class="_gaps_m">
 								<MkRadios v-model="provider">
 									<template #label>Translator type</template>
@@ -134,7 +74,7 @@
 									<option value="GoogleNoAPI">Google Translate(without API)</option>
 									<option value="Naver">Naver Papago</option>
 								</MkRadios>
-	
+
 								<template v-if="provider === 'DeepL'">
 									<MkInput v-model="deeplAuthKey">
 										<template #prefix><i class="fas fa-key"></i></template>
@@ -170,7 +110,7 @@
 		</MkStickyContainer>
 	</div>
 	</template>
-	
+
 	<script lang="ts" setup>
 	import { } from 'vue';
 	import XHeader from './_header_.vue';
@@ -188,7 +128,7 @@
 	import { definePageMetadata } from '@/scripts/page-metadata';
 	import MkButton from '@/components/MkButton.vue';
 	import MkColorInput from '@/components/MkColorInput.vue';
-	
+
 	let name: string | null = $ref(null);
 	let description: string | null = $ref(null);
 	let maintainerName: string | null = $ref(null);
@@ -204,7 +144,7 @@
 	let deeplIsPro: boolean = $ref(false);
 	let naverClientId: string = $ref('');
 	let naverClientSecret: string = $ref('');
-	
+
 	async function init() {
 		const meta = await os.api('admin/meta');
 		name = meta.name;
@@ -221,10 +161,10 @@
 		deeplIsPro = meta.deeplIsPro;
 		naverClientId = meta.naverClientId;
 		naverClientSecret = meta.naverClientSecret;
-	
+
 		provider = meta.translatorType;
 	}
-	
+
 	function save() {
 		os.apiWithDialog('admin/update-meta', {
 			name,
@@ -245,76 +185,16 @@
 			fetchInstance();
 		});
 	}
-	
+
 	const headerTabs = $computed(() => []);
-	
+
 	definePageMetadata({
 		title: i18n.ts.general,
 		icon: 'ti ti-settings',
 
-<script lang="ts" setup>
-import { } from 'vue';
-import XHeader from './_header_.vue';
-import MkSwitch from '@/components/MkSwitch.vue';
-import MkInput from '@/components/MkInput.vue';
-import MkTextarea from '@/components/MkTextarea.vue';
-import FormSection from '@/components/form/section.vue';
-import FormSplit from '@/components/form/split.vue';
-import FormSuspense from '@/components/form/suspense.vue';
-import * as os from '@/os';
-import { fetchInstance } from '@/instance';
-import { i18n } from '@/i18n';
-import { definePageMetadata } from '@/scripts/page-metadata';
-import MkButton from '@/components/MkButton.vue';
-
-let name: string | null = $ref(null);
-let description: string | null = $ref(null);
-let maintainerName: string | null = $ref(null);
-let maintainerEmail: string | null = $ref(null);
-let pinnedUsers: string = $ref('');
-let cacheRemoteFiles: boolean = $ref(false);
-let cacheRemoteSensitiveFiles: boolean = $ref(false);
-let enableServiceWorker: boolean = $ref(false);
-let swPublicKey: any = $ref(null);
-let swPrivateKey: any = $ref(null);
-let deeplAuthKey: string = $ref('');
-let deeplIsPro: boolean = $ref(false);
-
-async function init(): Promise<void> {
-	const meta = await os.api('admin/meta');
-	name = meta.name;
-	description = meta.description;
-	maintainerName = meta.maintainerName;
-	maintainerEmail = meta.maintainerEmail;
-	pinnedUsers = meta.pinnedUsers.join('\n');
-	cacheRemoteFiles = meta.cacheRemoteFiles;
-	cacheRemoteSensitiveFiles = meta.cacheRemoteSensitiveFiles;
-	enableServiceWorker = meta.enableServiceWorker;
-	swPublicKey = meta.swPublickey;
-	swPrivateKey = meta.swPrivateKey;
-	deeplAuthKey = meta.deeplAuthKey;
-	deeplIsPro = meta.deeplIsPro;
-}
-
-function save(): void {
-	os.apiWithDialog('admin/update-meta', {
-		name,
-		description,
-		maintainerName,
-		maintainerEmail,
-		pinnedUsers: pinnedUsers.split('\n'),
-		cacheRemoteFiles,
-		cacheRemoteSensitiveFiles,
-		enableServiceWorker,
-		swPublicKey,
-		swPrivateKey,
-		deeplAuthKey,
-		deeplIsPro,
-	}).then(() => {
-		fetchInstance();
 	});
 	</script>
-	
+
 	<style lang="scss" module>
 	.footer {
 		-webkit-backdrop-filter: var(--blur, blur(15px));
